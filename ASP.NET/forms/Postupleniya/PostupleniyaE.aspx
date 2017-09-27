@@ -71,14 +71,6 @@
                             EnableClientScript="true" ValidationGroup="savedoc" />
 
 </div>
-<div class="clearfix">
-  <asp:Label CssClass="descLbl" ID="ctrlКоличествоОбщееLabel" runat="server" Text="Общее количество товара на складе" EnableViewState="False">
-</asp:Label>
-<ac:DecimalTextBox CssClass="descTxt" ID="ctrlКоличествоОбщее" runat="server">
-</ac:DecimalTextBox>
-
-
-</div>
 <br/>
 
 </div>

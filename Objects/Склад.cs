@@ -35,7 +35,8 @@ namespace Sneg.АСУ_Склад
             "ВладелецСклада",
             "ВладелецСклада.Фамилия as \'Фамилия\' on \'-Владелец склада\'",
             "ВладелецСклада.Имя as \'Имя\' on \'-Владелец склада\'",
-            "ВладелецСклада.Отчество as \'Отчество\' on \'-Владелец склада\'"})]
+            "ВладелецСклада.Отчество as \'Отчество\' on \'-Владелец склада\'",
+            "КоличествоОбщее as \'Суммарное количество товара\'"})]
     [AssociatedDetailViewAttribute("СкладE", "ТоварНаСкладе", "ТоварНаСкладеE", true, "-Товар на складе", "Товар на складе", true, new string[] {
             ""})]
     [MasterViewDefineAttribute("СкладE", "ВладелецСклада", ICSSoft.STORMNET.LookupTypeEnum.Standard, "", "Фамилия")]
@@ -44,7 +45,8 @@ namespace Sneg.АСУ_Склад
             "Вместимость as \'Вместимость\'",
             "ВладелецСклада.Фамилия",
             "ВладелецСклада.Имя",
-            "ВладелецСклада.Отчество"})]
+            "ВладелецСклада.Отчество",
+            "КоличествоОбщее as \'Суммарное количество товара\'"})]
     public class Склад : ICSSoft.STORMNET.DataObject
     {
         
@@ -124,6 +126,30 @@ namespace Sneg.АСУ_Склад
                 // *** Start programmer edit section *** (Склад.Вместимость Set end)
 
                 // *** End programmer edit section *** (Склад.Вместимость Set end)
+            }
+        }
+        
+        /// <summary>
+        /// КоличествоОбщее.
+        /// </summary>
+        // *** Start programmer edit section *** (Склад.КоличествоОбщее CustomAttributes)
+
+        // *** End programmer edit section *** (Склад.КоличествоОбщее CustomAttributes)
+        [ICSSoft.STORMNET.NotStored()]
+        public virtual decimal КоличествоОбщее
+        {
+            get
+            {
+                // *** Start programmer edit section *** (Склад.КоличествоОбщее Get)
+
+                return 0;
+                // *** End programmer edit section *** (Склад.КоличествоОбщее Get)
+            }
+            set
+            {
+                // *** Start programmer edit section *** (Склад.КоличествоОбщее Set)
+
+                // *** End programmer edit section *** (Склад.КоличествоОбщее Set)
             }
         }
         

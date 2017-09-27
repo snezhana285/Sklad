@@ -36,8 +36,7 @@ namespace Sneg.АСУ_Склад
             "Количество as \'Количество (в тоннах)\'",
             "Склад",
             "Товар",
-            "Машина",
-            "КоличествоОбщее as \'Общее количество товара на складе\'"})]
+            "Машина"})]
     [MasterViewDefineAttribute("ПоступленияE", "Склад", ICSSoft.STORMNET.LookupTypeEnum.Standard, "", "Название")]
     [MasterViewDefineAttribute("ПоступленияE", "Товар", ICSSoft.STORMNET.LookupTypeEnum.Standard, "", "Название")]
     [MasterViewDefineAttribute("ПоступленияE", "Машина", ICSSoft.STORMNET.LookupTypeEnum.Standard, "", "Марка")]
@@ -46,8 +45,7 @@ namespace Sneg.АСУ_Склад
             "Количество as \'Количество\'",
             "Склад.Название",
             "Товар.Название",
-            "Машина.Марка",
-            "КоличествоОбщее as \'Общее количество товара на складе\'"})]
+            "Машина.Марка"})]
     public class Поступления : ICSSoft.STORMNET.DataObject
     {
         
@@ -127,30 +125,6 @@ namespace Sneg.АСУ_Склад
                 // *** Start programmer edit section *** (Поступления.Дата Set end)
 
                 // *** End programmer edit section *** (Поступления.Дата Set end)
-            }
-        }
-        
-        /// <summary>
-        /// КоличествоОбщее.
-        /// </summary>
-        // *** Start programmer edit section *** (Поступления.КоличествоОбщее CustomAttributes)
-
-        // *** End programmer edit section *** (Поступления.КоличествоОбщее CustomAttributes)
-        [ICSSoft.STORMNET.NotStored()]
-        public virtual decimal КоличествоОбщее
-        {
-            get
-            {
-                // *** Start programmer edit section *** (Поступления.КоличествоОбщее Get)
-
-                return 0;
-                // *** End programmer edit section *** (Поступления.КоличествоОбщее Get)
-            }
-            set
-            {
-                // *** Start programmer edit section *** (Поступления.КоличествоОбщее Set)
-
-                // *** End programmer edit section *** (Поступления.КоличествоОбщее Set)
             }
         }
         
