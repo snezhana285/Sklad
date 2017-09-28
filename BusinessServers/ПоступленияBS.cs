@@ -12,8 +12,10 @@ namespace Sneg.АСУ_Склад
 {
     using System;
     using System.Xml;
-    
-    
+    using ICSSoft.STORMNET;
+    using ICSSoft.STORMNET.Business;
+
+
     // *** Start programmer edit section *** (Using statements)
 
     // *** End programmer edit section *** (Using statements)
@@ -40,7 +42,12 @@ namespace Sneg.АСУ_Склад
         public virtual ICSSoft.STORMNET.DataObject[] OnUpdateПоступления(Sneg.АСУ_Склад.Поступления UpdatedObject)
         {
             // *** Start programmer edit section *** (OnUpdateПоступления)
-
+            if(UpdatedObject.GetStatus() == ObjectStatus.Deleted)
+            {
+                UpdatedObject.LockObject(UpdatedObject);
+                UpdatedObject.SetStatus(ObjectStatus.Altered);
+                UpdatedObject.Актуально = false;
+            }
             return new ICSSoft.STORMNET.DataObject[0];
             // *** End programmer edit section *** (OnUpdateПоступления)
         }
