@@ -59,7 +59,7 @@
 
 
 </div>
-<asp:ScriptManager ID="ScriptManager1" runat="server" >
+<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" LoadScriptsBeforeUI="true">
 </asp:ScriptManager>
 
 <fieldset ID="ctrl_fsВладелец_склада" style="clear: left">
@@ -102,34 +102,33 @@
         </div>
     </div>
 </asp:Content>
-<asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder0">
-    <script type="text/javascript">
+<asp:Content runat="server" ContentPlaceHolderId="ContentPlaceHolder0">
+    <script type="text/javascript">                        
         $(function () {
-            $('#<%=ctrlТоварНаСкладе.ClientID%>').on('rowadded.ajaxgroupedit', function (e, d) {
-                var row = $(d);
-                setSummaryCountChange(row);                
+            $('#<%=ctrlНазвание.ClientID%>').on('change', function () {    
+                var isNameWh = isNameWarehouse();                
+                if (!isNameWh)
+                    alert("Склад с таким названеим уже существует");                
             });
-            $('#<%=ctrlТоварНаСкладе.ClientID%>').on('rowdeleted.ajaxgroupedit', function (e, d) {                
-                setSummaryCount();
-            });
-            var rows = $('#<%=ctrlТоварНаСкладе.ClientID%> table tr').not(':eq(0)');
-            setSummaryCountChange(rows);
-            setSummaryCount();
-        });
-        function setSummaryCountChange(rows) {
-            rows.find('td:eq(3) input').change(function () {
-                setSummaryCount();
-            });
-        }
-        function setSummaryCount() {
-            var data = $('#<%=ctrlТоварНаСкладе.ClientID%>').ajaxgroupedit('getDataRows');
-            if (data.length !== 0) {
-                var result = 0;
-                $.each(data, function (index, value) {
-                    result += parseInt($(value).find('td:eq(3) input').val());
+            function isNameWarehouse() {
+                var nameWh = $('#<%=ctrlНазвание.ClientID%>').val();
+                var isName = "";
+                $.ajax({
+                    type: "POST",
+                    url: window.location.pathname + "/IsNameWarehouse",
+                    datatype: "json",
+                    contentType: "application/json; charset-utf-8",
+                    data: JSON.stringify({ whName: nameWh }),
+                    async: false,
+                    success: function (data) {
+                        isName = data.d
+                    },
+                    error: function (data) {
+                        isName = "Ошибка при выполнении запроса";
+                    }                    
                 });
-                $('#<%=ctrlКоличествоОбщее.ClientID%>').val(result);
+                return isName;
             }
-        }
+        });
     </script>
 </asp:Content>

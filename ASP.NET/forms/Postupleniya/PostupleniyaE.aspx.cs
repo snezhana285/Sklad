@@ -5,7 +5,13 @@ namespace Sneg.АСУ_Склад
     using ICSSoft.STORMNET;
     using ICSSoft.STORMNET.Web.Controls;
     using ICSSoft.STORMNET.Web.AjaxControls;
-    
+    using System.Linq;
+    using ICSSoft.STORMNET.Business.LINQProvider;
+    using ICSSoft.STORMNET.FunctionalLanguage.SQLWhere;
+    using ICSSoft.STORMNET.FunctionalLanguage;
+    using ICSSoft.STORMNET.Business;
+    using System.Web.Services;
+
     public partial class ПоступленияE : BaseEditForm<Поступления>
     {
         /// <summary>
@@ -31,11 +37,27 @@ namespace Sneg.АСУ_Склад
         {
         }
 
+        [WebMethod]
+        public static decimal GetCapacity(string carPk)
+        {
+            var ds = (SQLDataService)DataServiceProvider.DataService;
+            return ds.Query<Машина>(Машина.Views.МашинаE).Where(k=>k.__PrimaryKey==carPk).FirstOrDefault().Грузоподъемность;           
+        }
+
         /// <summary>
         /// Здесь лучше всего писать бизнес-логику, оперируя только объектом данных.
         /// </summary>
         protected override void PreApplyToControls()
         {
+            var ds = (SQLDataService)DataServiceProvider.DataService;
+            var actualCar = ds.Query<Машина>(Машина.Views.МашинаL).Where(k => k.Актуально);
+            ctrlМашина.LimitFunction = LinqToLcs.GetLcs(actualCar.Expression, Машина.Views.МашинаL).LimitFunction;
+            
+            var actualWarehouse = ds.Query<Склад>(Склад.Views.СкладL).Where(k => k.Актуально);
+            ctrlСклад.LimitFunction = LinqToLcs.GetLcs(actualWarehouse.Expression, Склад.Views.СкладL).LimitFunction;
+
+            var actualGood = ds.Query<Товар>(Товар.Views.ТоварL).Where(k => k.Актуально);
+            ctrlТовар.LimitFunction = LinqToLcs.GetLcs(actualGood.Expression, Товар.Views.ТоварL).LimitFunction;
         }
 
         /// <summary>

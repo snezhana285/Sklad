@@ -34,7 +34,8 @@ namespace Sneg.АСУ_Склад
             "Название as \'Название\'"})]
     [View("ТоварL", new string[] {
             "Номер as \'Номер\'",
-            "Название as \'Название\'"})]
+            "Название as \'Название\'",
+            "Актуально as \'Актуально\'"})]
     public class Товар : ICSSoft.STORMNET.DataObject
     {
         

@@ -5,7 +5,13 @@ namespace Sneg.АСУ_Склад
     using ICSSoft.STORMNET;
     using ICSSoft.STORMNET.Web.Controls;
     using ICSSoft.STORMNET.Web.AjaxControls;
-    
+    using System.Linq;
+    using ICSSoft.STORMNET.Business.LINQProvider;
+    using ICSSoft.STORMNET.FunctionalLanguage.SQLWhere;
+    using ICSSoft.STORMNET.FunctionalLanguage;
+    using ICSSoft.STORMNET.Business;
+    using System.Web.Services;
+
     public partial class СкладE : BaseEditForm<Склад>
     {
         /// <summary>
@@ -31,11 +37,25 @@ namespace Sneg.АСУ_Склад
         {
         }
 
+        [WebMethod]
+        public static bool IsNameWarehouse(string whName)
+        {
+            var ds = (SQLDataService)DataServiceProvider.DataService;            
+            var whList = ds.Query<Склад>(Склад.Views.СкладE).Where(k => k.Название.ToLower() == whName.ToLower());
+            if (whList.Count() > 0)
+                return false;
+            else
+                return true;
+        }
+
         /// <summary>
         /// Здесь лучше всего писать бизнес-логику, оперируя только объектом данных.
         /// </summary>
         protected override void PreApplyToControls()
         {
+            var ds = (SQLDataService)DataServiceProvider.DataService;
+            var actualOwner = ds.Query<Личность>(Личность.Views.ЛичностьL).Where(k => k.Актуально);
+            ctrlВладелецСклада.LimitFunction = LinqToLcs.GetLcs(actualOwner.Expression, Личность.Views.ЛичностьL).LimitFunction;
         }
 
         /// <summary>

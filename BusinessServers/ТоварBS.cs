@@ -21,34 +21,34 @@ namespace Sneg.АСУ_Склад
 
 
     /// <summary>
-    /// Поступления BS.
+    /// ТоварBS.
     /// </summary>
-    // *** Start programmer edit section *** (ПоступленияBS CustomAttributes)
+    // *** Start programmer edit section *** (ТоварBS CustomAttributes)
 
-    // *** End programmer edit section *** (ПоступленияBS CustomAttributes)
+    // *** End programmer edit section *** (ТоварBS CustomAttributes)
     [ICSSoft.STORMNET.AccessType(ICSSoft.STORMNET.AccessType.none)]
-    public class ПоступленияBS : ICSSoft.STORMNET.Business.BusinessServer
+    public class ТоварBS : ICSSoft.STORMNET.Business.BusinessServer
     {
         
-        // *** Start programmer edit section *** (ПоступленияBS CustomMembers)
+        // *** Start programmer edit section *** (ТоварBS CustomMembers)
 
-        // *** End programmer edit section *** (ПоступленияBS CustomMembers)
+        // *** End programmer edit section *** (ТоварBS CustomMembers)
 
         
-        // *** Start programmer edit section *** (OnUpdateПоступления CustomAttributes)
+        // *** Start programmer edit section *** (OnUpdateТовар CustomAttributes)
 
-        // *** End programmer edit section *** (OnUpdateПоступления CustomAttributes)
-        public virtual ICSSoft.STORMNET.DataObject[] OnUpdateПоступления(Sneg.АСУ_Склад.Поступления UpdatedObject)
+        // *** End programmer edit section *** (OnUpdateТовар CustomAttributes)
+        public virtual ICSSoft.STORMNET.DataObject[] OnUpdateТовар(Sneg.АСУ_Склад.Товар UpdatedObject)
         {
-            // *** Start programmer edit section *** (OnUpdateПоступления)
-            if(UpdatedObject.GetStatus() == ObjectStatus.Deleted)
+            // *** Start programmer edit section *** (OnUpdateТовар)
+            if (UpdatedObject.GetStatus() == ObjectStatus.Deleted)
             {
                 DataService.LoadObject(UpdatedObject);
                 UpdatedObject.SetStatus(ObjectStatus.Altered);
                 UpdatedObject.Актуально = false;
             }
             return new ICSSoft.STORMNET.DataObject[0];
-            // *** End programmer edit section *** (OnUpdateПоступления)
+            // *** End programmer edit section *** (OnUpdateТовар)
         }
     }
 }

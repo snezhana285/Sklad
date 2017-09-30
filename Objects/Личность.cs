@@ -36,7 +36,8 @@ namespace Sneg.АСУ_Склад
     [View("ЛичностьL", new string[] {
             "Фамилия as \'Фамилия\'",
             "Имя as \'Имя\'",
-            "Отчество as \'Отчество\'"})]
+            "Отчество as \'Отчество\'",
+            "Актуально as \'Актуально\'"})]
     public class Личность : ICSSoft.STORMNET.DataObject
     {
         
