@@ -34,6 +34,7 @@ namespace Sneg.АСУ_Склад
             "Актуально as \'Актуально\'",
             "Дата as \'Дата\'",
             "Количество as \'Количество (в тоннах)\'",
+            "КоличествоОбщее as \'Общее количество товара\'",
             "Склад",
             "Товар",
             "Машина"})]
@@ -43,6 +44,7 @@ namespace Sneg.АСУ_Склад
     [View("ПоступленияL", new string[] {
             "Дата",
             "Количество as \'Количество\'",
+            "КоличествоОбщее as \'Общее количество товара\'",
             "Склад.Название",
             "Товар.Название",
             "Машина.Марка",
@@ -97,7 +99,31 @@ namespace Sneg.АСУ_Склад
                 // *** End programmer edit section *** (Поступления.Количество Set end)
             }
         }
-        
+
+        /// <summary>
+        /// КоличествоОбщее.
+        /// </summary>
+        // *** Start programmer edit section *** (Склад.КоличествоОбщее CustomAttributes)
+
+        // *** End programmer edit section *** (Склад.КоличествоОбщее CustomAttributes)
+        [ICSSoft.STORMNET.NotStored()]
+        public virtual decimal КоличествоОбщее
+        {
+            get
+            {
+                // *** Start programmer edit section *** (Склад.КоличествоОбщее Get)
+
+                return 0;
+                // *** End programmer edit section *** (Склад.КоличествоОбщее Get)
+            }
+            set
+            {
+                // *** Start programmer edit section *** (Склад.КоличествоОбщее Set)
+
+                // *** End programmer edit section *** (Склад.КоличествоОбщее Set)
+            }
+        }
+
         /// <summary>
         /// Дата.
         /// </summary>

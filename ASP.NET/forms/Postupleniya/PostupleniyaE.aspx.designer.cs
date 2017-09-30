@@ -13,6 +13,15 @@ namespace Sneg.АСУ_Склад {
     public partial class ПоступленияE {
         
         /// <summary>
+        /// ValidationSummary1 элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        
+        /// <summary>
         /// ctrlАктуальноLabel элемент управления.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace Sneg.АСУ_Склад {
         protected global::ICSSoft.STORMNET.Web.AjaxControls.DatePickerValidator ctrlДатаDatePickerValidator;
         
         /// <summary>
+        /// ctrlДатаCompareValidator элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator ctrlДатаCompareValidator;
+        
+        /// <summary>
         /// ctrlКоличествоLabel элемент управления.
         /// </summary>
         /// <remarks>
@@ -74,6 +92,33 @@ namespace Sneg.АСУ_Склад {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::ICSSoft.STORMNET.Web.AjaxControls.DecimalTextBox ctrlКоличество;
+        
+        /// <summary>
+        /// ctrlКоличествоRequiredFieldValidator1 элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ctrlКоличествоRequiredFieldValidator1;
+        
+        /// <summary>
+        /// ctrlКоличествоОбщееLabel элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ctrlКоличествоОбщееLabel;
+        
+        /// <summary>
+        /// ctrlКоличествоОбщее элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::ICSSoft.STORMNET.Web.AjaxControls.DecimalTextBox ctrlКоличествоОбщее;
         
         /// <summary>
         /// ctrlСкладLabel элемент управления.

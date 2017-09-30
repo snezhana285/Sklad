@@ -54,7 +54,8 @@ namespace Sneg.АСУ_Склад
         /// </summary>
         protected override void PostApplyToControls()
         {
-            Page.Validate();
+            if (IsPostBack)
+                Page.Validate();
         }
 
         /// <summary>

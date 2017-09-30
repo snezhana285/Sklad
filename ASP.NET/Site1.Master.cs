@@ -15,6 +15,8 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Data;
+    using System.Web.UI.WebControls;
 
     /// <summary>
     /// Класс мастер-страницы приложения.
@@ -123,7 +125,7 @@
             LoadCurrentTheme();
             ApplyTreeViewCookie();
 
-            fio.Text = Context.User.Identity.Name;
+            fio.Text = Context.User.Identity.Name;           
 
             base.OnLoad(e);
         }
@@ -236,6 +238,13 @@
                 treeviewHideSpan.Attributes["class"] = "Hide";
                 treeviewShowSpan.Attributes["class"] = String.Empty;
             }
+        }
+        protected void TreeView1_TreeNodeDataBound(object sender, TreeNodeEventArgs e)
+        {
+           /* SiteMapNode nodeFromSiteMap = (SiteMapNode)e.Node.DataItem;
+            if (nodeFromSiteMap["imageUrl"] != null)
+                  e.Node.ImageUrl = System.IO.Path.Combine("~/Images/", nodeFromSiteMap["imageUrl"]);*/
+                e.Node.ImageUrl = ((SiteMapNode)e.Node.DataItem)["imageUrl"];
         }
     }
 }

@@ -13,6 +13,15 @@ namespace Sneg.АСУ_Склад {
     public partial class СкладE {
         
         /// <summary>
+        /// ValidationSummary1 элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        
+        /// <summary>
         /// ctrlАктуальноLabel элемент управления.
         /// </summary>
         /// <remarks>
@@ -101,24 +110,6 @@ namespace Sneg.АСУ_Склад {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator ctrlВладелецСкладаRequiredFieldValidator;
-        
-        /// <summary>
-        /// ctrlКоличествоОбщееLabel элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ctrlКоличествоОбщееLabel;
-        
-        /// <summary>
-        /// ctrlКоличествоОбщее элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::ICSSoft.STORMNET.Web.AjaxControls.DecimalTextBox ctrlКоличествоОбщее;
         
         /// <summary>
         /// ScriptManager1 элемент управления.

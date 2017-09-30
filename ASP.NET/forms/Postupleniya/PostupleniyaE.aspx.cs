@@ -44,6 +44,20 @@ namespace Sneg.АСУ_Склад
             return ds.Query<Машина>(Машина.Views.МашинаE).Where(k=>k.__PrimaryKey==carPk).FirstOrDefault().Грузоподъемность;           
         }
 
+        [WebMethod]
+        public static decimal SetSummaryGoods(string whPk)
+        {
+            var ds = (SQLDataService)DataServiceProvider.DataService;
+            var warehouse = ds.Query<Склад>(Склад.Views.СкладE).Where(k => k.__PrimaryKey == whPk).First();
+            var goodsInWh = warehouse.ТоварНаСкладе;
+            decimal sum = 0;
+            foreach(ТоварНаСкладе gInWh in goodsInWh)
+            {
+                sum += gInWh.Количество;
+            }
+            return sum;
+        }
+
         /// <summary>
         /// Здесь лучше всего писать бизнес-логику, оперируя только объектом данных.
         /// </summary>
@@ -66,7 +80,8 @@ namespace Sneg.АСУ_Склад
         /// </summary>
         protected override void PostApplyToControls()
         {
-            Page.Validate();
+            if (IsPostBack)
+                Page.Validate();
         }
 
         /// <summary>

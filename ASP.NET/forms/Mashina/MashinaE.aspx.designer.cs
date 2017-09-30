@@ -13,6 +13,15 @@ namespace Sneg.АСУ_Склад {
     public partial class МашинаE {
         
         /// <summary>
+        /// ValidationSummary1 элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        
+        /// <summary>
         /// ctrlАктуальноLabel элемент управления.
         /// </summary>
         /// <remarks>

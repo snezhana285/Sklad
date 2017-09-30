@@ -1,3 +1,29 @@
-﻿body {
+﻿#defLine {
+    display:inline-block;
+   
 }
-
+#defBlock {
+    border: 1px solid black;
+    height: 200px;
+    width: 250px;
+    margin-right:20px;
+}
+#defMenu a{
+    color: green;
+}
+#defBlock {
+    display: inline-block;
+}
+#defConteiner{
+    height:700px;
+}
+#defBlockLine {
+    height: 224px;
+    margin-top:5px;
+}
+#invis a {
+    color: #fff;    
+}
+#invis {
+    list-style-type: none;
+}

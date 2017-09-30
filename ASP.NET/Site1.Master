@@ -6,6 +6,7 @@
     <%-- Мета-тэг X-UA-Compatible должен быть самым первым. --%>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="./App_Themes/BaseTheme/Warehouse.css">
     <title>
         <asp:ContentPlaceHolder ID="PageTitlePlaceholder" runat="server" />
         <asp:Localize ID="Localize1" Text="<%$ Resources: Resource, Master_Page_Title %>" runat="server"></asp:Localize>
