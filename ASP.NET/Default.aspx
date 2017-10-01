@@ -1,11 +1,11 @@
 ﻿<%@ Page AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="ICSSoft.STORMNET.Web.Default" Language="C#" MasterPageFile="~/Site1.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div>
+    <div id="defHeader">
         <h1><asp:Localize Text="<%$ Resources: Resource, Home_Page %>" runat="server"></asp:Localize></h1><br />
     </div>
     <div ID="defConteiner">
-        <div id="defBlockLine">
+         
         <div id="defBlock">
             <div id="defLine">
                 <img src="./Images/personBig.png" />
@@ -48,9 +48,9 @@
                 </ul>
             </div>
         </div>
-        </div>
+        
 
-        <div id="defBlockLine">
+       
         <div id="defBlock">
             <div id="defLine">
                 <img src="./Images/warehouseBig.png" />
@@ -93,6 +93,6 @@
                 </ul>
             </div>
         </div>
-        </div>
+        
     </div>
 </asp:Content>

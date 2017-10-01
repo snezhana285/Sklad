@@ -13,8 +13,9 @@ namespace Sneg.АСУ_Склад
     using System;
     using System.Xml;
     using ICSSoft.STORMNET;
-    
-    
+    using ICSSoft.STORMNET.Business;
+
+
     // *** Start programmer edit section *** (Using statements)
 
     // *** End programmer edit section *** (Using statements)
@@ -26,6 +27,7 @@ namespace Sneg.АСУ_Склад
     // *** Start programmer edit section *** (Склад CustomAttributes)
 
     // *** End programmer edit section *** (Склад CustomAttributes)
+    [BusinessServer("Sneg.АСУ_Склад.СкладBS, АСУ_Склад.BusinessServers", ICSSoft.STORMNET.Business.DataServiceObjectEvents.OnAllEvents)]
     [AutoAltered()]
     [AccessType(ICSSoft.STORMNET.AccessType.none)]
     [View("СкладE", new string[] {
@@ -43,10 +45,11 @@ namespace Sneg.АСУ_Склад
     [View("СкладL", new string[] {
             "Название as \'Название\'",
             "Вместимость as \'Вместимость\'",
+            "ВладелецСклада",
             "ВладелецСклада.Фамилия",
             "ВладелецСклада.Имя",
             "ВладелецСклада.Отчество",            
-            "Актуально as \'Актуально\'"})]
+            "Актуально as \'Актуально\'"}, Hidden = new string[] { "ВладелецСклада" })]
     public class Склад : ICSSoft.STORMNET.DataObject
     {
         

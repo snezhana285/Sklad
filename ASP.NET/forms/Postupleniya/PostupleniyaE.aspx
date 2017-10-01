@@ -32,9 +32,9 @@
 <ac:DatePickerValidator ID="ctrlДатаDatePickerValidator" runat="server" ControlToValidate="ctrlДата" 
                         ErrorMessage="Введена некорректная дата: Дата." Text="*" 
                         EnableClientScript="true" ValidationGroup="savedoc" CssClass="validator-datePicker" />
-<asp:CompareValidator ID="ctrlДатаCompareValidator" runat="server" ControlToValidate="ctrlДата" 
+<%--<asp:CompareValidator ID="ctrlДатаCompareValidator" runat="server" ControlToValidate="ctrlДата" 
                       ErrorMessage="Дата не может быть меньше текущей" Text="*"   
-                      EnableClientScript="true" ValidationGroup="savedoc" CssClass="validator-datePicker" />
+                      EnableClientScript="true" ValidationGroup="savedoc" CssClass="validator-datePicker" />--%>
     
 </div>
 <div class="clearfix">
@@ -120,16 +120,16 @@
                 });
                 return sum;
             }
-        });
+        
 
-        $(function () {
+        
             $('#<%=ctrlКоличество.ClientID%>').on('change', function () {    
                 var capacity = getCapacity();                
                 var countGood = $('#<%=ctrlКоличество.ClientID%>').val();
                 if (capacity < Number(countGood))
                     alert("Количество товара превышает грузопадъемность машины");       
 
-                var sum =Number( $('#<%=ctrlКоличествоОбщее.ClientID%>').val()) + Number($('#<%=ctrlКоличество.ClientID%>').val());
+                var sum = setSummary() + Number($('#<%=ctrlКоличество.ClientID%>').val());
                 $('#<%=ctrlКоличествоОбщее.ClientID%>').val(sum);
 
             });

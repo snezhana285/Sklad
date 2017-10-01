@@ -14,8 +14,10 @@ namespace Sneg.АСУ_Склад
     using System.Xml;
     using ICSSoft.STORMNET.Business;
     using ICSSoft.STORMNET;
-    
-    
+    using ICSSoft.STORMNET.Business.LINQProvider;
+    using System.Linq;
+
+
     // *** Start programmer edit section *** (Using statements)
 
     // *** End programmer edit section *** (Using statements)
@@ -46,9 +48,12 @@ namespace Sneg.АСУ_Склад
             "Количество as \'Количество\'",
             "КоличествоОбщее as \'Общее количество товара\'",
             "Склад.Название",
+            "Склад",
             "Товар.Название",
+            "Товар",
             "Машина.Марка",
-            "Актуально as \'Актуально\'"})]
+            "Машина",
+            "Актуально as \'Актуально\'"}, Hidden = new string[] { "ВладелецМашины","Склад", "Товар" })]
     public class Поступления : ICSSoft.STORMNET.DataObject
     {
         
@@ -107,13 +112,18 @@ namespace Sneg.АСУ_Склад
 
         // *** End programmer edit section *** (Склад.КоличествоОбщее CustomAttributes)
         [ICSSoft.STORMNET.NotStored()]
+        [DataServiceExpression(typeof(ICSSoft.STORMNET.Business.SQLDataService), "(SELECT TOP 1 SUM(goods.\"Количество\")"+
+        " FROM ТоварНаСкладе as goods where goods.\"Склад\"=@STORMJoinedMasterKey0@) +@Количество@")]
         public virtual decimal КоличествоОбщее
         {
             get
             {
                 // *** Start programmer edit section *** (Склад.КоличествоОбщее Get)
-
-                return 0;
+                SQLDataService ds = (SQLDataService)DataServiceProvider.DataService;
+                decimal sum = 0;
+                var goodInWhList = ds.Query<ТоварНаСкладе>(ТоварНаСкладе.Views.ТоварНаСкладеE).Where(k => k.Склад == Склад).ToList();
+                sum = goodInWhList.Sum(k => k.Количество) + Количество;
+                return sum;
                 // *** End programmer edit section *** (Склад.КоличествоОбщее Get)
             }
             set

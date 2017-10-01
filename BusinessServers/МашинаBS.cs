@@ -10,7 +10,11 @@
 
 namespace Sneg.АСУ_Склад
 {
+    using ICSSoft.STORMNET;
+    using ICSSoft.STORMNET.Business;
+    using ICSSoft.STORMNET.Business.LINQProvider;
     using System;
+    using System.Linq;
     using System.Xml;
     
     
@@ -40,7 +44,19 @@ namespace Sneg.АСУ_Склад
         public virtual ICSSoft.STORMNET.DataObject[] OnUpdateМашина(Sneg.АСУ_Склад.Машина UpdatedObject)
         {
             // *** Start programmer edit section *** (OnUpdateМашина)
+            if (UpdatedObject.GetStatus() == ObjectStatus.Deleted)
+            {
+                DataService.LoadObject(UpdatedObject);                
+                UpdatedObject.SetStatus(ObjectStatus.Altered);
+                UpdatedObject.Актуально = false;
 
+                var supplyList = ((SQLDataService)DataService).Query<Поступления>(Поступления.Views.ПоступленияL).Where(k => k.Машина.__PrimaryKey == UpdatedObject.__PrimaryKey).ToArray();
+                foreach (var supply in supplyList)
+                {
+                    supply.SetStatus(ObjectStatus.Deleted);
+                }
+                return supplyList;
+            }
             return new ICSSoft.STORMNET.DataObject[0];
             // *** End programmer edit section *** (OnUpdateМашина)
         }

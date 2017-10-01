@@ -24,13 +24,14 @@ namespace Sneg.АСУ_Склад
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+                      
             ctrlFind.Click += new EventHandler(this.OnButtonFindClick);
         }
         void OnButtonFindClick(Object sender, EventArgs e)
         {
-            string warehouse = ctrlWarehouse.Text;
+            string warehouse = ctrlСклад.Text;
             //перечислить владельцев машин, привозящих товар на конкретный склад
-            SQLDataService ds = (SQLDataService)DataServiceProvider.DataService;           
+            SQLDataService ds = (SQLDataService)DataServiceProvider.DataService;                       
 
             var pseudoDetailМашина = new PseudoDetail<Машина, Поступления>(
                 Поступления.Views.ПоступленияE,

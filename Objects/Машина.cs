@@ -13,8 +13,9 @@ namespace Sneg.АСУ_Склад
     using System;
     using System.Xml;
     using ICSSoft.STORMNET;
-    
-    
+    using ICSSoft.STORMNET.Business;
+
+
     // *** Start programmer edit section *** (Using statements)
 
     // *** End programmer edit section *** (Using statements)
@@ -26,6 +27,7 @@ namespace Sneg.АСУ_Склад
     // *** Start programmer edit section *** (Машина CustomAttributes)
 
     // *** End programmer edit section *** (Машина CustomAttributes)
+    [BusinessServer("Sneg.АСУ_Склад.МашинаBS, АСУ_Склад.BusinessServers", ICSSoft.STORMNET.Business.DataServiceObjectEvents.OnAllEvents)]
     [AutoAltered()]
     [AccessType(ICSSoft.STORMNET.AccessType.none)]
     [View("МашинаE", new string[] {
@@ -39,11 +41,12 @@ namespace Sneg.АСУ_Склад
     [MasterViewDefineAttribute("МашинаE", "ВладелецМашины", ICSSoft.STORMNET.LookupTypeEnum.Standard, "", "Фамилия")]
     [View("МашинаL", new string[] {
             "Марка as \'Марка\'",
+            "ВладелецМашины",
             "Грузоподъемность as \'Грузоподъемность\'",
             "ВладелецМашины.Фамилия as \'Фамилия владельца\'",
             "ВладелецМашины.Имя as \'Имя владельца\'",
             "ВладелецМашины.Отчество as \'Отчество валдельца\'",
-            "Актуально"})]
+            "Актуально"} , Hidden = new string[] { "ВладелецМашины"})]
     public class Машина : ICSSoft.STORMNET.DataObject
     {
         

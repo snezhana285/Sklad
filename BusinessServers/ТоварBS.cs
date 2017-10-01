@@ -15,8 +15,14 @@ namespace Sneg.АСУ_Склад
 
 
     // *** Start programmer edit section *** (Using statements)
+    using ICSSoft.STORMNET.Business.LINQProvider;
+    using ICSSoft.STORMNET.FunctionalLanguage.SQLWhere;
+    using ICSSoft.STORMNET.FunctionalLanguage;
     using ICSSoft.STORMNET;
     using ICSSoft.STORMNET.Business;
+    using System.Data;
+    using System.Linq;
+    using System.Collections.Generic;
     // *** End programmer edit section *** (Using statements)
 
 
@@ -41,13 +47,26 @@ namespace Sneg.АСУ_Склад
         public virtual ICSSoft.STORMNET.DataObject[] OnUpdateТовар(Sneg.АСУ_Склад.Товар UpdatedObject)
         {
             // *** Start programmer edit section *** (OnUpdateТовар)
+            var updToObj = new List<DataObject>();
             if (UpdatedObject.GetStatus() == ObjectStatus.Deleted)
             {
                 DataService.LoadObject(UpdatedObject);
                 UpdatedObject.SetStatus(ObjectStatus.Altered);
                 UpdatedObject.Актуально = false;
+                var goodInWhList = ((SQLDataService)DataService).Query<ТоварНаСкладе>(ТоварНаСкладе.Views.ТоварНаСкладеE).Where(k => k.Товар.__PrimaryKey == UpdatedObject.__PrimaryKey).ToList();
+                foreach (var goodInWh in goodInWhList)
+                {
+                    goodInWh.SetStatus(ObjectStatus.Deleted);
+                }
+                updToObj.AddRange(goodInWhList);
+                var supplyList = ((SQLDataService)DataService).Query<Поступления>(Поступления.Views.ПоступленияL).Where(k => k.Товар.__PrimaryKey == UpdatedObject.__PrimaryKey).ToList();
+                foreach (var supply in supplyList)
+                {
+                    supply.SetStatus(ObjectStatus.Deleted);
+                }
+                updToObj.AddRange(supplyList);
             }
-            return new ICSSoft.STORMNET.DataObject[0];
+            return updToObj.ToArray();
             // *** End programmer edit section *** (OnUpdateТовар)
         }
     }

@@ -5,17 +5,16 @@
 #defBlock {
     border: 1px solid black;
     height: 200px;
-    width: 250px;
-    margin-right:20px;
+    width: 270px;
+    margin-right: 20px;
+    display: inline-block;
+    margin-top: 5px;
 }
 #defMenu a{
     color: green;
 }
-#defBlock {
-    display: inline-block;
-}
 #defConteiner{
-    height:700px;
+    width:900px;
 }
 #defBlockLine {
     height: 224px;
@@ -26,4 +25,14 @@
 }
 #invis {
     list-style-type: none;
+}
+@media (max-width: 1150px) {
+    #defConteiner {
+        width: 870px;
+    }
+}
+@media (max-width: 855px) {
+    #defConteiner {
+        width: 560px;
+    }
 }

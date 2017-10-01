@@ -5,8 +5,7 @@
 <head id="Head1" runat="server">
     <%-- Мета-тэг X-UA-Compatible должен быть самым первым. --%>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="./App_Themes/BaseTheme/Warehouse.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
     <title>
         <asp:ContentPlaceHolder ID="PageTitlePlaceholder" runat="server" />
         <asp:Localize ID="Localize1" Text="<%$ Resources: Resource, Master_Page_Title %>" runat="server"></asp:Localize>
@@ -45,7 +44,7 @@
             </div>
             <div id="pageBlockTreeview" runat="server">
                 <div class="treeview-wrapper">
-                    <ac:IcsTreeView ID="TreeView1" runat="server" DataSourceID="SiteMapDataSource1" SkinID="NavigateTreeView" />
+                    <ac:IcsTreeView ID="TreeView1" runat="server" DataSourceID="SiteMapDataSource1" SkinID="NavigateTreeView" OnTreeNodeDataBound="TreeView1_TreeNodeDataBound"/>
                 </div>
                 <asp:SiteMapDataSource ID="SiteMapDataSource1" ShowStartingNode="False" runat="server" />
             </div>

@@ -35,6 +35,7 @@ namespace Sneg.АСУ_Склад
         /// </summary>
         protected override void Preload()
         {
+            ctrlТоварНаСкладе.
         }
 
         [WebMethod]
@@ -56,6 +57,8 @@ namespace Sneg.АСУ_Склад
             var ds = (SQLDataService)DataServiceProvider.DataService;
             var actualOwner = ds.Query<Личность>(Личность.Views.ЛичностьL).Where(k => k.Актуально);
             ctrlВладелецСклада.LimitFunction = LinqToLcs.GetLcs(actualOwner.Expression, Личность.Views.ЛичностьL).LimitFunction;
+
+            
         }
 
         /// <summary>

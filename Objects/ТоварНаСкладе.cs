@@ -13,8 +13,9 @@ namespace Sneg.АСУ_Склад
     using System;
     using System.Xml;
     using ICSSoft.STORMNET;
-    
-    
+    using ICSSoft.STORMNET.Business;
+
+
     // *** Start programmer edit section *** (Using statements)
 
     // *** End programmer edit section *** (Using statements)
@@ -26,13 +27,15 @@ namespace Sneg.АСУ_Склад
     // *** Start programmer edit section *** (ТоварНаСкладе CustomAttributes)
 
     // *** End programmer edit section *** (ТоварНаСкладе CustomAttributes)
+    [BusinessServer("Sneg.АСУ_Склад.ТоварНаСкладеBS, АСУ_Склад.BusinessServers", ICSSoft.STORMNET.Business.DataServiceObjectEvents.OnAllEvents)]
     [AutoAltered()]
     [Caption("Товар на складе")]
     [AccessType(ICSSoft.STORMNET.AccessType.none)]
     [View("ТоварНаСкладеE", new string[] {
             "Товар",
+            "Склад",
             "Количество as \'Количество\'",
-            "Актуально as \'Актуально\'"})]
+            "Актуально as \'Актуально\'"} , Hidden = new string[] { "Склад"}) ]
     [MasterViewDefineAttribute("ТоварНаСкладеE", "Товар", ICSSoft.STORMNET.LookupTypeEnum.Standard, "", "Название")]
     public class ТоварНаСкладе : ICSSoft.STORMNET.DataObject
     {

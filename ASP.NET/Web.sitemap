@@ -18,7 +18,7 @@
       <siteMapNode title="Данные" url="~/flexberry/AuditEntityByObjectsList/" />
     </siteMapNode>
     <siteMapNode title="АСУ_Склад" roles="*" xmlns="">
-      <siteMapNode title="Машины" description="" url="~/forms/Mashina/MashinaL.aspx" src="~/Images/car.png"/>
+      <siteMapNode title="Машины" description="" url="~/forms/Mashina/MashinaL.aspx" imageUrl="~/Images/car.png" />
       <siteMapNode title="Личности" description="" url="~/forms/Lichnost/LichnostL.aspx" imageUrl="~/Images/person.png"/>
       <siteMapNode title="Товары" description="" url="~/forms/Tovar/TovarL.aspx" imageUrl="~/Images/good.png"/>
       <siteMapNode title="Склады" description="" url="~/forms/Sklad/SkladL.aspx" imageUrl="~/Images/warehouse.png"/>

@@ -96,6 +96,7 @@
             PageContentManager.AttachExternalFile("~/shared/script/jquery.alerts.js");
             PageContentManager.AttachExternalFile("~/shared/script/jquery.sticky.js");
             PageContentManager.AttachExternalFile("~/shared/script/jquery.ics.js");
+            PageContentManager.AttachExternalFile("~/App_Themes/BaseTheme/Warehouse.css");
 
             base.OnInit(e);
         }
@@ -125,7 +126,7 @@
             LoadCurrentTheme();
             ApplyTreeViewCookie();
 
-            fio.Text = Context.User.Identity.Name;           
+            fio.Text = Context.User.Identity.Name;            
 
             base.OnLoad(e);
         }
@@ -240,11 +241,8 @@
             }
         }
         protected void TreeView1_TreeNodeDataBound(object sender, TreeNodeEventArgs e)
-        {
-           /* SiteMapNode nodeFromSiteMap = (SiteMapNode)e.Node.DataItem;
-            if (nodeFromSiteMap["imageUrl"] != null)
-                  e.Node.ImageUrl = System.IO.Path.Combine("~/Images/", nodeFromSiteMap["imageUrl"]);*/
-                e.Node.ImageUrl = ((SiteMapNode)e.Node.DataItem)["imageUrl"];
+        {           
+            e.Node.ImageUrl = ((SiteMapNode)e.Node.DataItem)["imageUrl"];
         }
     }
 }

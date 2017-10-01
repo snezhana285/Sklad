@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h2>Перечислить владельцев машин, привозящих товар на конкретный склад</h2>
-    <asp:TextBox runat="server" ID="ctrlWarehouse" Text="Склад"></asp:TextBox>
+    <asp:TextBox runat="server" ID="ctrlСклад" Text="Склад"></asp:TextBox>
     <asp:Button runat="server" ID="ctrlFind" Text="Найти"/>
     
 

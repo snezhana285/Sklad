@@ -48,13 +48,10 @@ namespace Sneg.АСУ_Склад
         public static decimal SetSummaryGoods(string whPk)
         {
             var ds = (SQLDataService)DataServiceProvider.DataService;
-            var warehouse = ds.Query<Склад>(Склад.Views.СкладE).Where(k => k.__PrimaryKey == whPk).First();
-            var goodsInWh = warehouse.ТоварНаСкладе;
-            decimal sum = 0;
-            foreach(ТоварНаСкладе gInWh in goodsInWh)
-            {
-                sum += gInWh.Количество;
-            }
+            var objPk = (object)whPk;
+            var goodInWhList = ds.Query<ТоварНаСкладе>(ТоварНаСкладе.Views.ТоварНаСкладеE).Where(k => k.Склад.__PrimaryKey == objPk).ToList();
+            decimal sum = goodInWhList.Sum(k => k.Количество);
+            
             return sum;
         }
 

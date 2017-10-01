@@ -13,8 +13,9 @@ namespace Sneg.АСУ_Склад
     using System;
     using System.Xml;
     using ICSSoft.STORMNET;
-    
-    
+    using ICSSoft.STORMNET.Business;
+
+
     // *** Start programmer edit section *** (Using statements)
 
     // *** End programmer edit section *** (Using statements)
@@ -26,6 +27,7 @@ namespace Sneg.АСУ_Склад
     // *** Start programmer edit section *** (Товар CustomAttributes)
 
     // *** End programmer edit section *** (Товар CustomAttributes)
+    [BusinessServer("Sneg.АСУ_Склад.ТоварBS, АСУ_Склад.BusinessServers", ICSSoft.STORMNET.Business.DataServiceObjectEvents.OnAllEvents)]
     [AutoAltered()]
     [AccessType(ICSSoft.STORMNET.AccessType.none)]
     [View("ТоварE", new string[] {

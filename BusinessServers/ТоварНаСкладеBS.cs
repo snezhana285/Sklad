@@ -12,10 +12,10 @@ namespace Sneg.АСУ_Склад
 {
     using System;
     using System.Xml;
-    
-    
-    // *** Start programmer edit section *** (Using statements)
 
+
+    // *** Start programmer edit section *** (Using statements)
+   
     // *** End programmer edit section *** (Using statements)
 
 
@@ -39,8 +39,8 @@ namespace Sneg.АСУ_Склад
         // *** End programmer edit section *** (OnUpdateТоварНаСкладе CustomAttributes)
         public virtual ICSSoft.STORMNET.DataObject[] OnUpdateТоварНаСкладе(Sneg.АСУ_Склад.ТоварНаСкладе UpdatedObject)
         {
-            // *** Start programmer edit section *** (OnUpdateТоварНаСкладе)
-
+            // *** Start programmer edit section *** (OnUpdateТоварНаСкладе)            
+            
             return new ICSSoft.STORMNET.DataObject[0];
             // *** End programmer edit section *** (OnUpdateТоварНаСкладе)
         }

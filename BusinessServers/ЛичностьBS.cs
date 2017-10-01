@@ -22,6 +22,8 @@ namespace Sneg.АСУ_Склад
     using ICSSoft.STORMNET.Business;    
     using System.Data;
     using System.Linq;
+    using System.Collections.Generic;
+
     // *** End programmer edit section *** (Using statements)
 
 
@@ -46,25 +48,28 @@ namespace Sneg.АСУ_Склад
         public virtual ICSSoft.STORMNET.DataObject[] OnUpdateЛичность(Sneg.АСУ_Склад.Личность UpdatedObject)
         {
             // *** Start programmer edit section *** (OnUpdateЛичность)
+            var updToObj = new List<DataObject>();
             if (UpdatedObject.GetStatus() == ObjectStatus.Deleted)
             {
-                UpdatedObject.LockObject(UpdatedObject);
+                DataService.LoadObject(UpdatedObject);
                 UpdatedObject.SetStatus(ObjectStatus.Altered);
                 UpdatedObject.Актуально = false;
                 
-                var carList = ((SQLDataService)DataService).Query<Машина>(Машина.Views.МашинаL).Where(k => k.ВладелецМашины.__PrimaryKey == UpdatedObject.__PrimaryKey).ToArray();
+                var carList = ((SQLDataService)DataService).Query<Машина>(Машина.Views.МашинаL).Where(k => k.ВладелецМашины.__PrimaryKey == UpdatedObject.__PrimaryKey).ToList();
                 foreach(var car in carList)
                 {
                     car.SetStatus(ObjectStatus.Deleted);
                 }
-                var whList = ((SQLDataService)DataService).Query<Склад>(Склад.Views.СкладL).Where(k => k.ВладелецСклада.__PrimaryKey == UpdatedObject.__PrimaryKey).ToArray();
+                updToObj.AddRange(carList);
+                var whList = ((SQLDataService)DataService).Query<Склад>(Склад.Views.СкладL).Where(k => k.ВладелецСклада.__PrimaryKey == UpdatedObject.__PrimaryKey).ToList();
                 foreach (var wh in whList)
                 {
                     wh.SetStatus(ObjectStatus.Deleted);
                 }
-                return carList;
-            }
-            return new ICSSoft.STORMNET.DataObject[0];
+                updToObj.AddRange(whList);
+
+            }            
+            return updToObj.ToArray();
             // *** End programmer edit section *** (OnUpdateЛичность)
         }
     }
