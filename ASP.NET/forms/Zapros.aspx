@@ -10,7 +10,8 @@
         <asp:Label CssClass="descLbl" ID="ctrlСкладLabel" runat="server" Text="Склад" EnableViewState="False">
         </asp:Label>
         <ac:MasterEditorAjaxLookUp ID="mealСклад" CssClass="descTxt" runat="server" ShowInThickBox="True" Autocomplete="true" />
-    
+    <br />
+
     <asp:Button runat="server" ID="ctrlFind" Text="Найти"/>
     
 
