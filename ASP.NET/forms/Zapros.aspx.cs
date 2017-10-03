@@ -23,26 +23,128 @@ namespace Sneg.АСУ_Склад
     public partial class Zapros : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-                      
+        {            
+            mealСклад.MasterViewName = Склад.Views.СкладL.Name;
+            mealСклад.MasterTypeName = typeof(Склад).AssemblyQualifiedName;
+            mealСклад.ShowObjectUrl = СкладE.FormPath;
+            mealСклад.PropertyToShow = Information.ExtractPropertyPath<Склад>(k => k.Название);
+
             ctrlFind.Click += new EventHandler(this.OnButtonFindClick);
+            ctrlFind2.Click += new EventHandler(this.OnButtonFind2Click);
+            ctrlFind3.Click += new EventHandler(this.OnButtonFind3Click);
+            ctrlFind4.Click += new EventHandler(this.OnButtonFind4Click);
+            ctrlFind5.Click += new EventHandler(this.OnButtonFind5Click);
         }
         void OnButtonFindClick(Object sender, EventArgs e)
         {
-            string warehouse = ctrlСклад.Text;
             //перечислить владельцев машин, привозящих товар на конкретный склад
-            SQLDataService ds = (SQLDataService)DataServiceProvider.DataService;                       
+
+            string warehouse = mealСклад.SelectedMasterPK;
+
+            SQLDataService ds = (SQLDataService)DataServiceProvider.DataService;
 
             var pseudoDetailМашина = new PseudoDetail<Машина, Поступления>(
                 Поступления.Views.ПоступленияE,
                 Information.ExtractPropertyPath<Поступления>(supply => supply.Машина));
 
-            var carList = ds.Query<Машина>(Машина.Views.МашинаE).Where(car => pseudoDetailМашина.Any(supply => supply.Склад.Название == warehouse)).ToList();
+            var carList = ds.Query<Машина>(Машина.Views.МашинаE).Where(car => pseudoDetailМашина.Any(supply => supply.Склад.__PrimaryKey == warehouse)).ToList();
 
-            var ownerList = carList.Select(car => car.ВладелецМашины).ToList();                  
+            var result = carList.Select(car => car.ВладелецМашины).ToList();
 
-            ctrlList.DataSource = ownerList;
-            ctrlList.DataBind();
+            ctrlList1.DataSource = result;
+            ctrlList1.DataBind();
+        }
+        void OnButtonFind2Click(Object sender, EventArgs e)
+        {
+            //для каждого склада указать самый тяжелый товар
+            SQLDataService ds = (SQLDataService)DataServiceProvider.DataService;
+            var allWh = ds.Query<Склад>(Склад.Views.СкладL).ToList();
+
+            var result = new List<ТоварНаСкладе>();
+
+            foreach (var wh in allWh)
+            {
+                var goodInWh = ds.Query<ТоварНаСкладе>(ТоварНаСкладе.Views.ТоварНаСкладеE).Where(k => k.Склад.__PrimaryKey == wh.__PrimaryKey).ToList();
+                if (goodInWh.Count > 0)
+                {
+                    decimal maxGood = goodInWh.Max(k => k.Количество);
+                    result.Add(goodInWh.Where(k => k.Количество == maxGood).First());
+                }
+
+            }
+
+
+            DataList2.DataSource = result;
+            DataList2.DataBind();
+        }
+        void OnButtonFind3Click(Object sender, EventArgs e)
+        {
+            //Перечислить товары, которые хранятся более, чем на одном складе
+            SQLDataService ds = (SQLDataService)DataServiceProvider.DataService;
+
+            var result = new List<ТоварНаСкладе>();
+            var goodInWhList = ds.Query<ТоварНаСкладе>(ТоварНаСкладе.Views.ТоварНаСкладеE).ToList();
+            var goodList = ds.Query<Товар>(Товар.Views.ТоварL).ToList();
+            foreach (var g in goodList)
+            {
+                var goods = goodInWhList.Where(k => k.Товар.__PrimaryKey.Equals(g.__PrimaryKey)).ToList();
+                if (goods.Count() > 1)
+                {
+                    result.Add(goods.FirstOrDefault());
+                }
+            }
+            DataList3.DataSource = result;
+            DataList3.DataBind();
+        }
+        void OnButtonFind4Click(Object sender, EventArgs e)
+        {
+            //получить для каждого склада количество хранящегося товара(общее и отдельно по товарам)
+            SQLDataService ds = (SQLDataService)DataServiceProvider.DataService;
+            var whList = ds.Query<Склад>(Склад.Views.СкладL).ToList();
+            var result = new List<StringAndDecimal>();
+            foreach (var wh in whList)
+            {
+                var goodInWhList = ds.Query<ТоварНаСкладе>(ТоварНаСкладе.Views.ТоварНаСкладеE).Where(k => k.Склад.__PrimaryKey == wh.__PrimaryKey).ToList();
+                var sum = goodInWhList.Sum(k => k.Количество);
+
+                result.Add(new StringAndDecimal { str = wh.Название + " Общее количество", dec = sum });
+                foreach (var good in goodInWhList)
+                {
+                    result.Add(new StringAndDecimal { str = good.Товар.Название, dec = good.Количество });
+                }
+                DataList4.DataSource = result;
+                DataList4.DataBind();
+            }
+        }
+        class StringAndDecimal
+        {
+            public string str { get; set; }
+            public decimal dec { get; set; }
+        }
+        void OnButtonFind5Click(Object sender, EventArgs e)
+        {
+            //есть ли владельцы машин, которые привозят товар на свой склад
+            SQLDataService ds = (SQLDataService)DataServiceProvider.DataService;
+            var result = new List<Личность>();
+            var supplyList = ds.Query<Поступления>(Поступления.Views.ПоступленияL).ToList();            
+
+            var whList = supplyList.Select(k=>k.Склад).Distinct().ToList();
+            var carList = supplyList.Select(k=>k.Машина).Distinct().ToList();
+            foreach(var wh in whList)
+            {
+                var car = carList.Where(k=>k.ВладелецМашины.__PrimaryKey==wh.ВладелецСклада.__PrimaryKey).ToList();
+                if (car.Count() > 0)
+                {
+                    var person = car.Select(k => k.ВладелецМашины).First();
+                    var perList = ds.Query<Личность>(Личность.Views.ЛичностьL).Where(k => k.__PrimaryKey == person.__PrimaryKey).First();
+                    result.Add(perList);
+                }
+            }
+
+
+
+            DataList5.DataSource = result;
+            DataList5.DataBind();
         }
     }
 }

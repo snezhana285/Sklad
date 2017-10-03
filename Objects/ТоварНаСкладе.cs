@@ -34,8 +34,9 @@ namespace Sneg.АСУ_Склад
     [View("ТоварНаСкладеE", new string[] {
             "Товар",
             "Склад",
+            "Склад.Название",
             "Количество as \'Количество\'",
-            "Актуально as \'Актуально\'"} , Hidden = new string[] { "Склад"}) ]
+            "Актуально as \'Актуально\'"} , Hidden = new string[] { "Склад", "Склад.Название" }) ]
     [MasterViewDefineAttribute("ТоварНаСкладеE", "Товар", ICSSoft.STORMNET.LookupTypeEnum.Standard, "", "Название")]
     public class ТоварНаСкладе : ICSSoft.STORMNET.DataObject
     {

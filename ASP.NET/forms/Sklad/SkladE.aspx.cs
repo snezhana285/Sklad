@@ -35,7 +35,7 @@ namespace Sneg.АСУ_Склад
         /// </summary>
         protected override void Preload()
         {
-            ctrlТоварНаСкладе.
+            
         }
 
         [WebMethod]

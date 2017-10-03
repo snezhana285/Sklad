@@ -6,11 +6,15 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h2>Перечислить владельцев машин, привозящих товар на конкретный склад</h2>
-    <asp:TextBox runat="server" ID="ctrlСклад" Text="Склад"></asp:TextBox>
+    <div class="clearfix">
+        <asp:Label CssClass="descLbl" ID="ctrlСкладLabel" runat="server" Text="Склад" EnableViewState="False">
+        </asp:Label>
+        <ac:MasterEditorAjaxLookUp ID="mealСклад" CssClass="descTxt" runat="server" ShowInThickBox="True" Autocomplete="true" />
+    
     <asp:Button runat="server" ID="ctrlFind" Text="Найти"/>
     
 
-    <asp:DataList ID="ctrlList"
+    <asp:DataList ID="ctrlList1"
         BorderColor="Black"
         BorderWidth="2px"
         BorderStyle="Solid"
@@ -27,6 +31,115 @@
             <asp:Label Text='<%# Eval("Фамилия")%>' runat="server" />
         </ItemTemplate>
     </asp:DataList>
+
+    <br /><br />
+
+    <h2>Для каждого склада указать самый тяжелый товар</h2>
+    <asp:Button runat="server" ID="ctrlFind2" Text="Найти"/>    
+
+    <asp:DataList ID="DataList2" 
+        BorderColor="Black"
+        BorderWidth="2px"
+        BorderStyle="Solid"
+        CellPadding="5"
+        CellSpacing="5"
+        RepeatDirection="Vertical"
+        RepeatLayout="Table"
+        runat="server">
+        <HeaderTemplate>
+            <table>
+                <tr>
+                    <td width="100px"><b>Склад</b></td>
+                    <td width="100px"><b>|Товар</b></td>
+                    <td width="100px"><b>|Количество</b></td>
+                </tr>
+            </table>            
+        </HeaderTemplate>
+        <ItemStyle BorderStyle="outset" BackColor="White" ForeColor="Black" BorderWidth="2px" />
+        <ItemTemplate>
+            <table>
+                <tr>
+                    <td width="100px"><asp:Label Text='<%# Eval("Склад.Название")%>' runat="server" /></td>
+                    <td width="100px">|<asp:Label Text='<%# Eval("Товар.Название")%>' runat="server" /></td>
+                    <td width="25px">|<asp:Label Text='<%# Eval("Количество")%>' runat="server" /></td>
+                </tr>
+            </table>
+        </ItemTemplate>       
+    </asp:DataList>    
+
+    <h2>Перечислить товары, которые хранятся более, чем на одном складе</h2>
+    <asp:Button runat="server" ID="ctrlFind3" Text="Найти"/>  
+
+    <asp:DataList ID="DataList3"
+        BorderColor="Black"
+        BorderWidth="2px"
+        BorderStyle="Solid"
+        CellPadding="5"
+        CellSpacing="5"
+        RepeatDirection="Vertical"
+        RepeatLayout="Table"
+        runat="server" >
+
+        <HeaderTemplate>
+            <b>Товар</b>
+        </HeaderTemplate>
+        <ItemTemplate>            
+            <asp:Label Text='<%# Eval("Товар.Название")%>' runat="server" />            
+        </ItemTemplate>
+    </asp:DataList>
+
+    <h2>Получить для каждого склада количество хранящегося товара (общее и отдельно по товарам)</h2>
+    <asp:Button runat="server" ID="ctrlFind4" Text="Найти"/>
+
+    <asp:DataList ID="DataList4"
+        BorderColor="Black"
+        BorderWidth="2px"
+        BorderStyle="Solid"
+        CellPadding="5"
+        CellSpacing="5"
+        RepeatDirection="Vertical"
+        RepeatLayout="Table"
+        runat="server" >
+
+        <HeaderTemplate>
+            <table>
+                <tr>
+                    <td width="200px"><b>Склад/Товар</b></td>
+                    <td width="100px"><b>|Количество</b></td>                    
+                </tr>
+            </table>     
+        </HeaderTemplate>
+        <ItemTemplate>            
+            <table>
+                <tr>
+                    <td width="200px"><asp:Label Text='<%# Eval("str")%>' runat="server" /></td>
+                    <td width="100px">|<asp:Label Text='<%# Eval("dec")%>' runat="server" /></td>                    
+                </tr>
+            </table>
+        </ItemTemplate>
+    </asp:DataList>
+
+    <h2>Владельцы машин, которые привозят товар на свой склад</h2>
+    <asp:Button runat="server" ID="ctrlFind5" Text="Найти"/>
+
+    <asp:DataList ID="DataList5"
+        BorderColor="Black"
+        BorderWidth="2px"
+        BorderStyle="Solid"
+        CellPadding="5"
+        CellSpacing="5"
+        RepeatDirection="Vertical"
+        RepeatLayout="Table"
+        runat="server" >
+
+        <HeaderTemplate>
+            <b>Владелец</b>
+        </HeaderTemplate>
+        <ItemTemplate>            
+            <asp:Label Text='<%# Eval("Фамилия")%>' runat="server" />            
+        </ItemTemplate>
+    </asp:DataList>
+</div>
      
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder0" runat="server">
